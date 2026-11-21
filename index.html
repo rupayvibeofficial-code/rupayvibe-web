@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Web - Earn Rewards & Surveys</title>
+  <title>RupayVibe Web - Earn Rewards, Spin & Surveys</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Buttons & Inputs எப்போதும் கிளிக் ஆவதை உறுதி செய்ய */
     button, input, a {
       position: relative;
       z-index: 50;
+    }
+    @keyframes spinWheel {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1440deg); }
+    }
+    .spinning {
+      animation: spinWheel 2.5s cubic-bezier(0.17, 0.67, 0.12, 0.99) forwards;
     }
   </style>
 </head>
@@ -55,12 +61,13 @@
       <script src="https://bauval.org/22/96a4d35694ad361e45a751c8bf38b77a"></script>
     </div>
 
-    <!-- Daily Tasks Grid -->
+    <!-- Daily Tasks Grid (4 Interactive Earning Cards) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <!-- Daily Bonus -->
+
+      <!-- 1. Daily Web Bonus -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
         <div>
-          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-medium">Daily Web Bonus</span>
+          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-medium">Daily Check-in</span>
           <h3 class="text-lg font-bold mt-2">Claim +10 Coins</h3>
           <p class="text-xs text-slate-400 mt-1">Visit RupayVibe Web daily & add instant coins to your wallet.</p>
         </div>
@@ -69,7 +76,36 @@
         </button>
       </div>
 
-      <!-- Daily Brain Quiz -->
+      <!-- 2. Sponsor Visit Task (Adsterra Smartlink) -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
+        <div>
+          <span class="text-[11px] bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full font-medium">Sponsor Task</span>
+          <h3 class="text-lg font-bold mt-2">Visit & Earn +20 Coins</h3>
+          <p class="text-xs text-slate-400 mt-1">Open sponsor page for 10 seconds to unlock +20 instant coins.</p>
+        </div>
+        <button id="sponsorTaskBtn" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2.5 rounded-xl text-sm transition">
+          Visit Sponsor (10s)
+        </button>
+      </div>
+
+      <!-- 3. Daily Lucky Spin -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full font-medium">Lucky Spin</span>
+            <h3 class="text-lg font-bold mt-2">Win up to +30 Coins</h3>
+            <p class="text-xs text-slate-400 mt-1">1 free spin every day!</p>
+          </div>
+          <div id="wheelIcon" class="w-14 h-14 rounded-full border-4 border-dashed border-emerald-400 flex items-center justify-center text-xl font-extrabold text-emerald-300 bg-slate-950">
+            🎡
+          </div>
+        </div>
+        <button id="spinBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
+          Spin Now
+        </button>
+      </div>
+
+      <!-- 4. Daily Brain Quiz -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
         <div>
           <span class="text-[11px] bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full font-medium">Daily Brain Quiz</span>
@@ -81,6 +117,7 @@
           Submit Answer
         </button>
       </div>
+
     </div>
 
     <!-- Surveys Section -->
@@ -90,11 +127,11 @@
           <h3 class="text-base font-bold">High-Paying Web Surveys & Offers</h3>
           <p class="text-xs text-slate-400">Complete surveys to earn 50 – 500 Coins directly</p>
         </div>
-        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Live</span>
+        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Coming Soon</span>
       </div>
       <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl p-6 text-center">
-        <p class="text-sm font-medium text-slate-300">Sign in with Google to load personalized surveys</p>
-        <p class="text-xs text-slate-500 mt-1">CPX Research & Offerwall will appear here once approved</p>
+        <p class="text-sm font-medium text-slate-300">BitLabs Offerwall & Surveys under verification</p>
+        <p class="text-xs text-slate-500 mt-1">Complete the 4 daily tasks above while Offerwall activates!</p>
       </div>
     </div>
 
@@ -127,11 +164,16 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
+    const SMARTLINK_URL = "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e";
+
     let currentUser = null;
     const authBtn = document.getElementById("authBtn");
     const coinBalanceEl = document.getElementById("coinBalance");
     const inrValueEl = document.getElementById("inrValue");
     const dailyBonusBtn = document.getElementById("dailyBonusBtn");
+    const sponsorTaskBtn = document.getElementById("sponsorTaskBtn");
+    const spinBtn = document.getElementById("spinBtn");
+    const wheelIcon = document.getElementById("wheelIcon");
     const quizSubmitBtn = document.getElementById("quizSubmitBtn");
 
     authBtn.onclick = async () => {
@@ -174,6 +216,7 @@
 
     const todayStr = new Date().toISOString().split("T")[0];
 
+    // 1. Daily Web Bonus (+10 Coins)
     dailyBonusBtn.onclick = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const userRef = doc(db, "users", currentUser.uid);
@@ -189,6 +232,65 @@
       loadUserWallet(currentUser);
     };
 
+    // 2. Sponsor Smartlink Task (+20 Coins after 10s)
+    sponsorTaskBtn.onclick = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastSponsorTask === todayStr) {
+        return alert("You already completed today's Sponsor Task! Come back tomorrow.");
+      }
+
+      window.open(SMARTLINK_URL, "_blank");
+      sponsorTaskBtn.disabled = true;
+      let sec = 10;
+      sponsorTaskBtn.innerText = `Verifying... ${sec}s`;
+
+      const timer = setInterval(async () => {
+        sec--;
+        if (sec > 0) {
+          sponsorTaskBtn.innerText = `Verifying... ${sec}s`;
+        } else {
+          clearInterval(timer);
+          await updateDoc(userRef, {
+            coins: increment(20),
+            lastSponsorTask: todayStr
+          });
+          sponsorTaskBtn.innerText = "Completed (+20 Coins)";
+          alert("Sponsor visit verified! +20 Coins added to your wallet!");
+          loadUserWallet(currentUser);
+        }
+      }, 1000);
+    };
+
+    // 3. Daily Lucky Spin (+5 to +30 Coins)
+    spinBtn.onclick = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastWebSpin === todayStr) {
+        return alert("You already used today's Lucky Spin! Come back tomorrow.");
+      }
+
+      spinBtn.disabled = true;
+      spinBtn.innerText = "Spinning...";
+      wheelIcon.classList.add("spinning");
+
+      const rewards = [5, 10, 15, 20, 25, 30];
+      const won = rewards[Math.floor(Math.random() * rewards.length)];
+
+      setTimeout(async () => {
+        await updateDoc(userRef, {
+          coins: increment(won),
+          lastWebSpin: todayStr
+        });
+        spinBtn.innerText = `Won +${won} Coins!`;
+        alert(`🎉 Congratulations! You won +${won} Coins!`);
+        loadUserWallet(currentUser);
+      }, 2600);
+    };
+
+    // 4. Daily Brain Quiz (+15 Coins)
     quizSubmitBtn.onclick = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const ans = document.getElementById("quizAnswer").value.trim();
