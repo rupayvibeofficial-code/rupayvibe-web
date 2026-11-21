@@ -3,121 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Web — Surveys, Quiz & Rewards</title>
+  <title>RupayVibe Web - Earn Rewards & Surveys</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-white min-h-screen font-sans">
+<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between font-sans">
 
   <!-- Header -->
-  <header class="bg-slate-900 border-b border-slate-800 px-4 py-4 flex justify-between items-center max-w-2xl mx-auto">
+  <header class="p-4 border-b border-slate-800 flex items-center justify-between max-w-2xl mx-auto w-full">
     <div>
-      <h1 class="text-xl font-bold text-emerald-400">RupayVibe <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">WEB</span></h1>
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold text-emerald-400">RupayVibe</h1>
+        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">WEB</span>
+      </div>
       <p class="text-xs text-slate-400">Synced with your RupayVibe App Wallet</p>
     </div>
-    <div id="userSection">
-      <button id="loginBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold px-4 py-2 rounded-xl text-sm transition">
-        Sign in with Google
-      </button>
-    </div>
+    <button id="authBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold text-sm px-4 py-2 rounded-lg transition">
+      Sign in with Google
+    </button>
   </header>
 
-  <main class="max-w-2xl mx-auto p-4 space-y-5">
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto w-full p-4 space-y-5 flex-1">
 
-    <!-- Wallet Card -->
-    <section class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-5 shadow-lg">
-      <div class="flex justify-between items-center">
-        <div>
-          <p class="text-emerald-100 text-xs uppercase tracking-wider">Total Wallet Balance</p>
-          <h2 class="text-3xl font-extrabold mt-1"><span id="coinBalance">0</span> Coins</h2>
-          <p class="text-xs text-emerald-100 mt-1">≈ ₹<span id="inrBalance">0.00</span> (Withdraw via RupayVibe App)</p>
-        </div>
-        <button id="logoutBtn" class="hidden bg-black/25 hover:bg-black/40 text-xs px-3 py-1.5 rounded-lg">Logout</button>
+    <!-- Wallet Balance Card -->
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-5 shadow-lg">
+      <p class="text-xs uppercase tracking-wider text-emerald-100 font-medium">Total Wallet Balance</p>
+      <div class="flex items-baseline gap-2 mt-1">
+        <h2 id="coinBalance" class="text-3xl font-extrabold">0 Coins</h2>
       </div>
-    </section>
-
-    <!-- Ad Slot 1 (Paste Monetag / Adsterra Banner Script Here Later) -->
-    <div id="ad-banner-top" class="bg-slate-900 border border-dashed border-slate-700 rounded-xl p-3 text-center text-xs text-slate-500">
-      <script>
-  atOptions = {
-    'key' : '96a4d35694ad361e45a751c8bf38b77a',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://bauval.org/22/96a4d35694ad361e45a751c8bf38b77a"></script>
+      <p id="inrValue" class="text-xs text-emerald-100 mt-1">≈ ₹0.00 (Withdraw via RupayVibe App)</p>
     </div>
 
-    <!-- Daily Web Check-in & Quiz Grid -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <!-- Web Check-In -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
+    <!-- Clean 320x50 Banner Ad (Click-Safe) -->
+    <div id="ad-banner-top" class="bg-slate-900 border border-slate-800 rounded-xl p-2 flex justify-center items-center overflow-hidden">
+      <script>
+        atOptions = {
+          'key' : '96a4d35694ad361e45a751c8bf38b77a',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://bauval.org/22/96a4d35694ad361e45a751c8bf38b77a"></script>
+    </div>
+
+    <!-- Daily Tasks Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- Daily Bonus -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
         <div>
-          <span class="text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md font-medium">Daily Web Bonus</span>
+          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-medium">Daily Web Bonus</span>
           <h3 class="text-lg font-bold mt-2">Claim +10 Coins</h3>
           <p class="text-xs text-slate-400 mt-1">Visit RupayVibe Web daily & add instant coins to your wallet.</p>
         </div>
-        <button id="dailyClaimBtn" class="mt-4 w-full bg-amber-500 hover:bg-amber-600 disabled:bg-slate-700 disabled:text-slate-400 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
+        <button id="dailyBonusBtn" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
           Claim 10 Coins
         </button>
       </div>
 
-      <!-- Quick Math Quiz -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
+      <!-- Daily Brain Quiz -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
         <div>
-          <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-md font-medium">Daily Brain Quiz</span>
+          <span class="text-[11px] bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full font-medium">Daily Brain Quiz</span>
           <h3 class="text-lg font-bold mt-2">Solve & Win +15 Coins</h3>
-          <p id="quizQuestion" class="text-sm text-emerald-300 font-semibold mt-2">What is 27 + 38?</p>
-          <input id="quizAnswer" type="number" placeholder="Enter answer" class="mt-2 w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-emerald-400" />
+          <p class="text-sm text-emerald-400 font-semibold mt-1">What is 27 + 38?</p>
+          <input id="quizAnswer" type="number" placeholder="Enter answer" class="mt-2 w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500" />
         </div>
-        <button id="quizSubmitBtn" class="mt-3 w-full bg-indigo-500 hover:bg-indigo-600 disabled:bg-slate-700 disabled:text-slate-400 text-white font-bold py-2.5 rounded-xl text-sm transition">
+        <button id="quizSubmitBtn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 rounded-xl text-sm transition">
           Submit Answer
         </button>
       </div>
-    </section>
+    </div>
 
-    <!-- Web Survey & Offerwall Section -->
-    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-      <div class="flex justify-between items-center mb-3">
+    <!-- Surveys Section -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+      <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-base font-bold text-white">High-Paying Web Surveys & Offers</h3>
+          <h3 class="text-base font-bold">High-Paying Web Surveys & Offers</h3>
           <p class="text-xs text-slate-400">Complete surveys to earn 50 – 500 Coins directly</p>
         </div>
-        <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full">Live</span>
+        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Live</span>
       </div>
-
-      <!-- CPX / BitLabs / TimeWall Iframe Area -->
       <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl p-6 text-center">
-        <p class="text-sm text-slate-300 font-medium">Sign in with Google to load personalized surveys</p>
+        <p class="text-sm font-medium text-slate-300">Sign in with Google to load personalized surveys</p>
         <p class="text-xs text-slate-500 mt-1">CPX Research & Offerwall will appear here once approved</p>
       </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="text-center text-xs text-slate-500 pt-4 pb-8 space-x-4">
-      <a href="/privacy.html" class="hover:text-emerald-400 underline">Privacy Policy</a>
-      <span>•</span>
-      <a href="mailto:rupayvibe.official@gmail.com" class="hover:text-emerald-400 underline">Support</a>
-      <p class="mt-2">© 2026 Jp studio — RupayVibe Web Portal</p>
-    </footer>
   </main>
 
-  <!-- Firebase Modular SDK -->
+  <!-- Footer -->
+  <footer class="p-4 border-t border-slate-800 text-center text-xs text-slate-500 space-x-4 max-w-2xl mx-auto w-full">
+    <span>© 2026 RupayVibe</span>
+    <a href="/privacy.html" class="text-emerald-400 hover:underline">Privacy Policy</a>
+  </footer>
+
+  <!-- Firebase SDKs -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // TODO: Replace with your RupayVibe Firebase Web Config
     const firebaseConfig = {
       apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
-  authDomain: "rupayvibe.firebaseapp.com",
-  projectId: "rupayvibe",
-  storageBucket: "rupayvibe.firebasestorage.app",
-  messagingSenderId: "692963834855",
-  appId: "1:692963834855:web:4868ff4b5dd682b0c99b42",
-  measurementId: "G-H8C08XSQN2"
+      authDomain: "rupayvibe.firebaseapp.com",
+      projectId: "rupayvibe",
+      storageBucket: "rupayvibe.firebasestorage.app",
+      messagingSenderId: "692963834855",
+      appId: "1:692963834855:web:4868ff4b5dd682b0c99b42",
+      measurementId: "G-H8C08XSQN2"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -126,83 +121,76 @@
     const provider = new GoogleAuthProvider();
 
     let currentUser = null;
-    const todayStr = new Date().toISOString().split('T')[0];
+    const authBtn = document.getElementById("authBtn");
+    const coinBalanceEl = document.getElementById("coinBalance");
+    const inrValueEl = document.getElementById("inrValue");
+    const dailyBonusBtn = document.getElementById("dailyBonusBtn");
+    const quizSubmitBtn = document.getElementById("quizSubmitBtn");
 
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const coinBalanceEl = document.getElementById('coinBalance');
-    const inrBalanceEl = document.getElementById('inrBalance');
-    const dailyClaimBtn = document.getElementById('dailyClaimBtn');
-    const quizSubmitBtn = document.getElementById('quizSubmitBtn');
-    const surveyContainer = document.getElementById('surveyContainer');
-
-    loginBtn.onclick = () => signInWithPopup(auth, provider).catch(err => alert(err.message));
-    logoutBtn.onclick = () => signOut(auth);
-
-    onAuthStateChanged(auth, async (user) => {
-      currentUser = user;
-      if (user) {
-        loginBtn.classList.add('hidden');
-        logoutBtn.classList.remove('hidden');
-        await loadUserWallet(user);
+    authBtn.onclick = async () => {
+      if (currentUser) {
+        await signOut(auth);
       } else {
-        loginBtn.classList.remove('hidden');
-        logoutBtn.classList.add('hidden');
-        coinBalanceEl.innerText = "0";
-        inrBalanceEl.innerText = "0.00";
+        await signInWithPopup(auth, provider);
       }
-    });
+    };
 
     async function loadUserWallet(user) {
       const userRef = doc(db, "users", user.uid);
       const snap = await getDoc(userRef);
-      if (!snap.exists()) {
+      if (snap.exists()) {
+        const coins = snap.data().coins || 0;
+        coinBalanceEl.innerText = `${coins} Coins`;
+        inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)} (Withdraw via RupayVibe App)`;
+      } else {
         await setDoc(userRef, {
-          name: user.displayName || "User",
           email: user.email,
-          coins: 0,
-          createdAt: new Date().toISOString()
+          name: user.displayName,
+          coins: 0
         });
+        coinBalanceEl.innerText = "0 Coins";
+        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
       }
-      const data = (await getDoc(userRef)).data();
-      const coins = data.coins || 0;
-      coinBalanceEl.innerText = coins;
-      inrBalanceEl.innerText = (coins / 100).toFixed(2);
-
-      if (data.lastWebClaim === todayStr) {
-        dailyClaimBtn.disabled = true;
-        dailyClaimBtn.innerText = "Claimed Today ✓";
-      }
-      if (data.lastWebQuiz === todayStr) {
-        quizSubmitBtn.disabled = true;
-        quizSubmitBtn.innerText = "Quiz Completed ✓";
-      }
-
-      // CPX Research Web Survey Iframe (Replace YOUR_CPX_APP_ID once approved)
-      surveyContainer.innerHTML = `
-        <p class="text-xs text-emerald-400 mb-2">Logged in as ${user.email} (UID: ${user.uid.slice(0,8)}...)</p>
-        <div class="p-4 bg-slate-900 rounded-lg text-xs text-slate-300">
-          CPX Research & TimeWall Survey Wall ready to embed here using your User ID!
-        </div>
-      `;
     }
 
-    dailyClaimBtn.onclick = async () => {
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        authBtn.innerText = "Sign Out";
+        loadUserWallet(user);
+      } else {
+        authBtn.innerText = "Sign in with Google";
+        coinBalanceEl.innerText = "0 Coins";
+        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
+      }
+    });
+
+    const todayStr = new Date().toISOString().split("T")[0];
+
+    dailyBonusBtn.onclick = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
       const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastWebBonus === todayStr) {
+        return alert("You already claimed today's Web Bonus! Come back tomorrow.");
+      }
       await updateDoc(userRef, {
         coins: increment(10),
-        lastWebClaim: todayStr
+        lastWebBonus: todayStr
       });
-      alert("+10 Coins added to your RupayVibe wallet!");
+      alert("+10 Coins added to your wallet!");
       loadUserWallet(currentUser);
     };
 
     quizSubmitBtn.onclick = async () => {
       if (!currentUser) return alert("Please sign in with Google first!");
-      const ans = document.getElementById('quizAnswer').value.trim();
+      const ans = document.getElementById("quizAnswer").value.trim();
       if (ans !== "65") return alert("Wrong answer! Try again (27 + 38 = ?)");
       const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastWebQuiz === todayStr) {
+        return alert("You already completed today's Quiz! Come back tomorrow.");
+      }
       await updateDoc(userRef, {
         coins: increment(15),
         lastWebQuiz: todayStr
@@ -210,6 +198,6 @@
       alert("Correct! +15 Coins added to your wallet!");
       loadUserWallet(currentUser);
     };
-  
+  </script>
 </body>
 </html>
