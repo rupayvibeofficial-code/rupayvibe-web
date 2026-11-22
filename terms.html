@@ -3,62 +3,315 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms of Service - RupayVibe Web</title>
+  <title>RupayVibe Web - Earn Rewards, Spin & Surveys</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    button, input, a {
+      position: relative;
+      z-index: 50;
+    }
+    @keyframes spinWheel {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1440deg); }
+    }
+    .spinning {
+      animation: spinWheel 2.5s cubic-bezier(0.17, 0.67, 0.12, 0.99) forwards;
+    }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-200 min-h-screen font-sans p-4 sm:p-6">
-  <div class="max-w-3xl mx-auto space-y-6 bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8">
-    <div class="border-b border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-3">
-      <div>
-        <h1 class="text-2xl font-bold text-emerald-400">Terms of Service</h1>
-        <p class="text-xs text-slate-400 mt-1">Last Updated: November 22, 2026 | Operated by JP Studio (RupayVibe)</p>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between font-sans">
+
+  <!-- Header -->
+  <header class="p-4 border-b border-slate-800 flex items-center justify-between max-w-2xl mx-auto w-full relative z-50">
+    <div>
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold text-emerald-400">RupayVibe</h1>
+        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">WEB</span>
       </div>
-      <a href="/" class="text-xs bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold px-3.5 py-2 rounded-lg">Back to Home</a>
+      <p class="text-xs text-slate-400">Synced with your RupayVibe App Wallet</p>
+    </div>
+    <button id="authBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold text-sm px-4 py-2 rounded-lg transition">
+      Sign in with Google
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto w-full p-4 space-y-5 flex-1">
+
+    <!-- Wallet Balance Card -->
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-5 shadow-lg">
+      <p class="text-xs uppercase tracking-wider text-emerald-100 font-medium">Total Wallet Balance</p>
+      <div class="flex items-baseline gap-2 mt-1">
+        <h2 id="coinBalance" class="text-3xl font-extrabold">0 Coins</h2>
+      </div>
+      <p id="inrValue" class="text-xs text-emerald-100 mt-1">≈ ₹0.00 (Withdraw via RupayVibe App)</p>
     </div>
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">1. Acceptance of Agreement</h2>
-      <p>By accessing or using <strong>RupayVibe Web</strong> (<code>https://rupayvibe-web.vercel.app</code>), you agree to be legally bound by these Terms of Service and our Privacy Policy. If you do not agree with any part of these terms, you must not use this website.</p>
-    </section>
+    <!-- Adsterra 320x50 Banner Ad -->
+    <div id="ad-banner-top" class="bg-slate-900 border border-slate-800 rounded-xl p-2 flex justify-center items-center overflow-hidden">
+      <script>
+        atOptions = {
+          'key' : '96a4d35694ad361e45a751c8bf38b77a',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script src="https://bauval.org/22/96a4d35694ad361e45a751c8bf38b77a"></script>
+    </div>
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">2. Eligibility & Account Rules</h2>
-      <ul class="list-disc pl-5 space-y-1">
-        <li>You must be at least <strong>18 years old</strong> to register and participate in surveys or reward tasks.</li>
-        <li>Only <strong>one account per person/household/device</strong> is permitted. Creating multiple accounts to farm bonuses is strictly prohibited.</li>
-        <li>You must use the same Google account linked to your official RupayVibe Android application to synchronize wallet Coins.</li>
-      </ul>
-    </section>
+    <!-- Daily Tasks Grid (4 Interactive Earning Cards) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">3. Virtual Coins & Redemption</h2>
-      <p>Users earn virtual loyalty points ("Coins") by completing daily check-ins, sponsor visits, quizzes, and third-party market research surveys. Coins have no direct monetary value outside the RupayVibe platform and can only be redeemed through the RupayVibe mobile app upon reaching the applicable minimum redemption threshold (1,000 Coins = ₹10 INR).</p>
-    </section>
+      <!-- Daily Web Bonus -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
+        <div>
+          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-medium">Daily Check-in</span>
+          <h3 class="text-lg font-bold mt-2">Claim +10 Coins</h3>
+          <p class="text-xs text-slate-400 mt-1">Visit RupayVibe Web daily & add instant coins to your wallet.</p>
+        </div>
+        <button id="dailyBonusBtn" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
+          Claim 10 Coins
+        </button>
+      </div>
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">4. Survey Quality & Anti-Fraud Policy</h2>
-      <p>When completing surveys from partners such as <strong>TheoremReach</strong> or <strong>BitLabs</strong>, you agree to provide truthful, consistent, and thoughtful answers. The following actions are strictly forbidden and will lead to immediate account termination and forfeiture of all Coins:</p>
-      <ul class="list-disc pl-5 space-y-1">
-        <li>Using VPNs, proxies, Tor, DNS changers, or emulators to mask your real location or IP address.</li>
-        <li>Rushing through surveys ("speeding") or providing contradictory/gibberish responses.</li>
-        <li>Using automated scripts, bots, or auto-clickers.</li>
-      </ul>
-    </section>
+      <!-- Sponsor Visit Task (Adsterra Smartlink) -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
+        <div>
+          <span class="text-[11px] bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full font-medium">Sponsor Task</span>
+          <h3 class="text-lg font-bold mt-2">Visit & Earn +20 Coins</h3>
+          <p class="text-xs text-slate-400 mt-1">Open sponsor page for 10 seconds to unlock +20 instant coins.</p>
+        </div>
+        <button id="sponsorTaskBtn" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2.5 rounded-xl text-sm transition">
+          Visit Sponsor (10s)
+        </button>
+      </div>
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">5. Chargebacks & Survey Reversals</h2>
-      <p>If a third-party survey partner rejects or reverses a completed survey due to quality failure or fraudulent activity, RupayVibe reserves the right to deduct the credited Coins from your wallet balance without prior notice.</p>
-    </section>
+      <!-- Daily Lucky Spin -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full font-medium">Lucky Spin</span>
+            <h3 class="text-lg font-bold mt-2">Win up to +30 Coins</h3>
+            <p class="text-xs text-slate-400 mt-1">1 free spin every day!</p>
+          </div>
+          <div id="wheelIcon" class="w-14 h-14 rounded-full border-4 border-dashed border-emerald-400 flex items-center justify-center text-xl font-extrabold text-emerald-300 bg-slate-950">
+            🎡
+          </div>
+        </div>
+        <button id="spinBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
+          Spin Now
+        </button>
+      </div>
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">6. Limitation of Liability & Modifications</h2>
-      <p>JP Studio provides RupayVibe Web on an "as-is" basis and reserves the right to modify reward rates, daily task limits, or these Terms of Service at any time.</p>
-    </section>
+      <!-- Daily Brain Quiz -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div>
+          <span class="text-[11px] bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full font-medium">Daily Brain Quiz</span>
+          <h3 class="text-lg font-bold mt-2">Solve & Win +15 Coins</h3>
+          <p class="text-sm text-emerald-400 font-semibold mt-1">What is 27 + 38?</p>
+          <input id="quizAnswer" type="number" placeholder="Enter answer" class="mt-2 w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500" />
+        </div>
+        <button id="quizSubmitBtn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 rounded-xl text-sm transition">
+          Submit Answer
+        </button>
+      </div>
 
-    <section class="space-y-2 text-sm leading-relaxed text-slate-300">
-      <h2 class="text-base font-bold text-white">7. Contact Information</h2>
-      <p>For questions regarding these Terms, contact us at <span class="text-emerald-400 font-medium">rupayvibe.official@gmail.com</span>.</p>
-    </section>
-  </div>
+    </div>
+
+    <!-- Surveys Section -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-base font-bold">High-Paying Web Surveys & Offers</h3>
+          <p class="text-xs text-slate-400">Complete surveys to earn 50 – 500 Coins directly</p>
+        </div>
+        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Coming Soon</span>
+      </div>
+      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl p-6 text-center">
+        <p class="text-sm font-medium text-slate-300">TheoremReach & BitLabs Offerwalls under verification</p>
+        <p class="text-xs text-slate-500 mt-1">Complete the 4 daily tasks above while Offerwall activates!</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="p-4 border-t border-slate-800 text-center text-xs text-slate-400 space-x-4 max-w-2xl mx-auto w-full relative z-50">
+    <span>© 2026 RupayVibe (JP Studio)</span>
+    <a href="/privacy.html" class="text-emerald-400 hover:underline">Privacy Policy</a>
+    <a href="/terms.html" class="text-emerald-400 hover:underline">Terms of Service</a>
+    <a href="/contact.html" class="text-emerald-400 hover:underline">Contact Us</a>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
+      authDomain: "rupayvibe.firebaseapp.com",
+      projectId: "rupayvibe",
+      storageBucket: "rupayvibe.firebasestorage.app",
+      messagingSenderId: "692963834855",
+      appId: "1:692963834855:web:4868ff4b5dd682b0c99b42",
+      measurementId: "G-H8C08XSQN2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    const SMARTLINK_URL = "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e";
+
+    let currentUser = null;
+    const authBtn = document.getElementById("authBtn");
+    const coinBalanceEl = document.getElementById("coinBalance");
+    const inrValueEl = document.getElementById("inrValue");
+    const dailyBonusBtn = document.getElementById("dailyBonusBtn");
+    const sponsorTaskBtn = document.getElementById("sponsorTaskBtn");
+    const spinBtn = document.getElementById("spinBtn");
+    const wheelIcon = document.getElementById("wheelIcon");
+    const quizSubmitBtn = document.getElementById("quizSubmitBtn");
+
+    authBtn.onclick = async () => {
+      if (currentUser) {
+        await signOut(auth);
+      } else {
+        await signInWithPopup(auth, provider);
+      }
+    };
+
+    async function loadUserWallet(user) {
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists()) {
+        const coins = snap.data().coins || 0;
+        coinBalanceEl.innerText = `${coins} Coins`;
+        inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)} (Withdraw via RupayVibe App)`;
+      } else {
+        await setDoc(userRef, {
+          email: user.email,
+          name: user.displayName,
+          coins: 0
+        });
+        coinBalanceEl.innerText = "0 Coins";
+        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
+      }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        authBtn.innerText = "Sign Out";
+        loadUserWallet(user);
+      } else {
+        authBtn.innerText = "Sign in with Google";
+        coinBalanceEl.innerText = "0 Coins";
+        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
+      }
+    });
+
+    const todayStr = new Date().toISOString().split("T")[0];
+
+    // 1. Daily Web Bonus (+10 Coins)
+    dailyBonusBtn.onclick = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastWebBonus === todayStr) {
+        return alert("You already claimed today's Web Bonus! Come back tomorrow.");
+      }
+      await updateDoc(userRef, {
+        coins: increment(10),
+        lastWebBonus: todayStr
+      });
+      alert("+10 Coins added to your wallet!");
+      loadUserWallet(currentUser);
+    };
+
+    // 2. Sponsor Smartlink Task (+20 Coins after 10s)
+    sponsorTaskBtn.onclick = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastSponsorTask === todayStr) {
+        return alert("You already completed today's Sponsor Task! Come back tomorrow.");
+      }
+
+      window.open(SMARTLINK_URL, "_blank");
+      sponsorTaskBtn.disabled = true;
+      let sec = 10;
+      sponsorTaskBtn.innerText = `Verifying... ${sec}s`;
+
+      const timer = setInterval(async () => {
+        sec--;
+        if (sec > 0) {
+          sponsorTaskBtn.innerText = `Verifying... ${sec}s`;
+        } else {
+          clearInterval(timer);
+          await updateDoc(userRef, {
+            coins: increment(20),
+            lastSponsorTask: todayStr
+          });
+          sponsorTaskBtn.innerText = "Completed (+20 Coins)";
+          alert("Sponsor visit verified! +20 Coins added to your wallet!");
+          loadUserWallet(currentUser);
+        }
+      }, 1000);
+    };
+
+    // 3. Daily Lucky Spin (+5 to +30 Coins)
+    spinBtn.onclick = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastWebSpin === todayStr) {
+        return alert("You already used today's Lucky Spin! Come back tomorrow.");
+      }
+
+      spinBtn.disabled = true;
+      spinBtn.innerText = "Spinning...";
+      wheelIcon.classList.add("spinning");
+
+      const rewards = [5, 10, 15, 20, 25, 30];
+      const won = rewards[Math.floor(Math.random() * rewards.length)];
+
+      setTimeout(async () => {
+        await updateDoc(userRef, {
+          coins: increment(won),
+          lastWebSpin: todayStr
+        });
+        spinBtn.innerText = `Won +${won} Coins!`;
+        alert(`🎉 Congratulations! You won +${won} Coins!`);
+        loadUserWallet(currentUser);
+      }, 2600);
+    };
+
+    // 4. Daily Brain Quiz (+15 Coins)
+    quizSubmitBtn.onclick = async () => {
+      if (!currentUser) return alert("Please sign in with Google first!");
+      const ans = document.getElementById("quizAnswer").value.trim();
+      if (ans !== "65") return alert("Wrong answer! Try again (27 + 38 = ?)");
+      const userRef = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && snap.data().lastWebQuiz === todayStr) {
+        return alert("You already completed today's Quiz! Come back tomorrow.");
+      }
+      await updateDoc(userRef, {
+        coins: increment(15),
+        lastWebQuiz: todayStr
+      });
+      alert("Correct! +15 Coins added to your wallet!");
+      loadUserWallet(currentUser);
+    };
+  </script>
+
+  <!-- Adsterra Social Bar Ad -->
+  <script data-cfasync="false" src="https://bauval.org/14/edcd64539f5e76d6e83cc37e4705ff32"></script>
 </body>
 </html>
