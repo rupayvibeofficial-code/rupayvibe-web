@@ -3,19 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Web - Earn Rewards, Spin & Surveys</title>
+  <title>RupayVibe Surveys - Earn Instant Rewards</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     button, input, a {
       position: relative;
       z-index: 50;
-    }
-    @keyframes spinWheel {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(1440deg); }
-    }
-    .spinning {
-      animation: spinWheel 2.5s cubic-bezier(0.17, 0.67, 0.12, 0.99) forwards;
     }
   </style>
 </head>
@@ -26,9 +19,9 @@
     <div>
       <div class="flex items-center gap-2">
         <h1 class="text-xl font-bold text-emerald-400">RupayVibe</h1>
-        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">WEB</span>
+        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">SURVEY PORTAL</span>
       </div>
-      <p class="text-xs text-slate-400">Synced with your RupayVibe App Wallet</p>
+      <p class="text-xs text-slate-400">Synced live with your RupayVibe App Wallet</p>
     </div>
     <button id="authBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold text-sm px-4 py-2 rounded-lg transition">
       Sign in with Google
@@ -40,11 +33,14 @@
 
     <!-- Wallet Balance Card -->
     <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-5 shadow-lg">
-      <p class="text-xs uppercase tracking-wider text-emerald-100 font-medium">Total Wallet Balance</p>
+      <div class="flex items-center justify-between">
+        <p class="text-xs uppercase tracking-wider text-emerald-100 font-medium">Total Wallet Balance</p>
+        <span class="text-[11px] bg-black/20 text-emerald-100 px-2.5 py-0.5 rounded-full">100 Coins = ₹1</span>
+      </div>
       <div class="flex items-baseline gap-2 mt-1">
         <h2 id="coinBalance" class="text-3xl font-extrabold">0 Coins</h2>
       </div>
-      <p id="inrValue" class="text-xs text-emerald-100 mt-1">≈ ₹0.00 (Withdraw via RupayVibe App)</p>
+      <p id="inrValue" class="text-xs text-emerald-100 mt-1">≈ ₹0.00 (Withdraw instantly via RupayVibe Android App)</p>
     </div>
 
     <!-- Adsterra 320x50 Banner Ad -->
@@ -61,7 +57,7 @@
       <script src="https://bauval.org/22/96a4d35694ad361e45a751c8bf38b77a"></script>
     </div>
 
-    <!-- Daily Tasks Grid (4 Interactive Earning Cards) -->
+    <!-- Quick Daily Web Tasks (2 Clean Tasks) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
       <!-- Daily Web Bonus -->
@@ -69,7 +65,7 @@
         <div>
           <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-medium">Daily Check-in</span>
           <h3 class="text-lg font-bold mt-2">Claim +10 Coins</h3>
-          <p class="text-xs text-slate-400 mt-1">Visit RupayVibe Web daily & add instant coins to your wallet.</p>
+          <p class="text-xs text-slate-400 mt-1">Visit RupayVibe Survey Portal daily & add instant coins.</p>
         </div>
         <button id="dailyBonusBtn" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
           Claim 10 Coins
@@ -88,50 +84,34 @@
         </button>
       </div>
 
-      <!-- Daily Lucky Spin -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
-        <div class="flex items-center justify-between">
-          <div>
-            <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full font-medium">Lucky Spin</span>
-            <h3 class="text-lg font-bold mt-2">Win up to +30 Coins</h3>
-            <p class="text-xs text-slate-400 mt-1">1 free spin every day!</p>
-          </div>
-          <div id="wheelIcon" class="w-14 h-14 rounded-full border-4 border-dashed border-emerald-400 flex items-center justify-center text-xl font-extrabold text-emerald-300 bg-slate-950">
-            🎡
-          </div>
-        </div>
-        <button id="spinBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
-          Spin Now
-        </button>
-      </div>
-
-      <!-- Daily Brain Quiz -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-3">
-        <div>
-          <span class="text-[11px] bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full font-medium">Daily Brain Quiz</span>
-          <h3 class="text-lg font-bold mt-2">Solve & Win +15 Coins</h3>
-          <p class="text-sm text-emerald-400 font-semibold mt-1">What is 27 + 38?</p>
-          <input id="quizAnswer" type="number" placeholder="Enter answer" class="mt-2 w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500" />
-        </div>
-        <button id="quizSubmitBtn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 rounded-xl text-sm transition">
-          Submit Answer
-        </button>
-      </div>
-
     </div>
 
-    <!-- Surveys Section (TheoremReach Live Offerwall) -->
+    <!-- Primary Surveys Section (TheoremReach Offerwall) -->
     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-base font-bold">High-Paying Web Surveys & Offers</h3>
-          <p class="text-xs text-slate-400">Complete surveys to earn 50 – 500 Coins directly</p>
+          <h3 class="text-base font-bold">TheoremReach Paid Surveys</h3>
+          <p class="text-xs text-slate-400">Share your opinion & earn 50 – 500 Coins directly</p>
         </div>
         <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Live</span>
       </div>
-      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[450px] flex items-center justify-center">
+      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[520px] flex items-center justify-center">
         <p class="text-sm text-slate-400 p-6 text-center">Sign in with Google above to load available surveys.</p>
       </div>
+    </div>
+
+    <!-- Secondary Survey Partner Card (CPX Research Ready) -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <h3 class="text-base font-bold">CPX Research Survey Wall</h3>
+          <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded font-semibold">PARTNER</span>
+        </div>
+        <p class="text-xs text-slate-400 mt-1">Extra high-paying global & Indian market surveys (Up to +500 Coins)</p>
+      </div>
+      <button id="cpxBtn" class="shrink-0 bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">
+        Open Wall
+      </button>
     </div>
 
   </main>
@@ -148,7 +128,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
@@ -167,16 +147,17 @@
 
     const SMARTLINK_URL = "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e";
     const THEOREMREACH_API_KEY = "9861c27a47152ec23917c82901e5";
+    const CPX_APP_ID = "YOUR_CPX_APP_ID";
 
     let currentUser = null;
+    let unsubscribeWallet = null;
+
     const authBtn = document.getElementById("authBtn");
     const coinBalanceEl = document.getElementById("coinBalance");
     const inrValueEl = document.getElementById("inrValue");
     const dailyBonusBtn = document.getElementById("dailyBonusBtn");
     const sponsorTaskBtn = document.getElementById("sponsorTaskBtn");
-    const spinBtn = document.getElementById("spinBtn");
-    const wheelIcon = document.getElementById("wheelIcon");
-    const quizSubmitBtn = document.getElementById("quizSubmitBtn");
+    const cpxBtn = document.getElementById("cpxBtn");
     const surveyContainer = document.getElementById("surveyContainer");
 
     authBtn.onclick = async () => {
@@ -187,42 +168,44 @@
       }
     };
 
-    async function loadUserWallet(user) {
+    function subscribeUserWallet(user) {
+      if (unsubscribeWallet) unsubscribeWallet();
       const userRef = doc(db, "users", user.uid);
-      const snap = await getDoc(userRef);
-      if (snap.exists()) {
-        const coins = snap.data().coins || 0;
-        coinBalanceEl.innerText = `${coins} Coins`;
-        inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)} (Withdraw via RupayVibe App)`;
-      } else {
-        await setDoc(userRef, {
-          email: user.email,
-          name: user.displayName,
-          coins: 0
-        });
-        coinBalanceEl.innerText = "0 Coins";
-        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
-      }
+
+      unsubscribeWallet = onSnapshot(userRef, async (snap) => {
+        if (snap.exists()) {
+          const coins = snap.data().coins || 0;
+          coinBalanceEl.innerText = `${coins} Coins`;
+          inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)} (Withdraw instantly via RupayVibe Android App)`;
+        } else {
+          await setDoc(userRef, {
+            email: user.email,
+            name: user.displayName,
+            coins: 100
+          }, { merge: true });
+        }
+      });
     }
 
     onAuthStateChanged(auth, (user) => {
       currentUser = user;
       if (user) {
         authBtn.innerText = "Sign Out";
-        loadUserWallet(user);
+        subscribeUserWallet(user);
         surveyContainer.innerHTML = `
           <iframe 
             src="https://theoremreach.com/respondent_entry/direct?api_key=${THEOREMREACH_API_KEY}&user_id=${user.uid}" 
             width="100%" 
-            height="500" 
+            height="540" 
             frameborder="0" 
             class="w-full bg-white">
           </iframe>
         `;
       } else {
+        if (unsubscribeWallet) unsubscribeWallet();
         authBtn.innerText = "Sign in with Google";
         coinBalanceEl.innerText = "0 Coins";
-        inrValueEl.innerText = "≈ ₹0.00 (Withdraw via RupayVibe App)";
+        inrValueEl.innerText = "≈ ₹0.00 (Withdraw instantly via RupayVibe Android App)";
         surveyContainer.innerHTML = `<p class="text-sm text-slate-400 p-6 text-center">Sign in with Google above to load available surveys.</p>`;
       }
     });
@@ -242,7 +225,6 @@
         lastWebBonus: todayStr
       });
       alert("+10 Coins added to your wallet!");
-      loadUserWallet(currentUser);
     };
 
     // 2. Sponsor Smartlink Task (+20 Coins after 10s)
@@ -271,54 +253,18 @@
           });
           sponsorTaskBtn.innerText = "Completed (+20 Coins)";
           alert("Sponsor visit verified! +20 Coins added to your wallet!");
-          loadUserWallet(currentUser);
         }
       }, 1000);
     };
 
-    // 3. Daily Lucky Spin (+5 to +30 Coins)
-    spinBtn.onclick = async () => {
+    // 3. CPX Research Survey Wall
+    cpxBtn.onclick = () => {
       if (!currentUser) return alert("Please sign in with Google first!");
-      const userRef = doc(db, "users", currentUser.uid);
-      const snap = await getDoc(userRef);
-      if (snap.exists() && snap.data().lastWebSpin === todayStr) {
-        return alert("You already used today's Lucky Spin! Come back tomorrow.");
+      if (CPX_APP_ID === "YOUR_CPX_APP_ID") {
+        return alert("CPX Research Survey Wall is under approval. Use TheoremReach Surveys above!");
       }
-
-      spinBtn.disabled = true;
-      spinBtn.innerText = "Spinning...";
-      wheelIcon.classList.add("spinning");
-
-      const rewards = [5, 10, 15, 20, 25, 30];
-      const won = rewards[Math.floor(Math.random() * rewards.length)];
-
-      setTimeout(async () => {
-        await updateDoc(userRef, {
-          coins: increment(won),
-          lastWebSpin: todayStr
-        });
-        spinBtn.innerText = `Won +${won} Coins!`;
-        alert(`🎉 Congratulations! You won +${won} Coins!`);
-        loadUserWallet(currentUser);
-      }, 2600);
-    };
-
-    // 4. Daily Brain Quiz (+15 Coins)
-    quizSubmitBtn.onclick = async () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      const ans = document.getElementById("quizAnswer").value.trim();
-      if (ans !== "65") return alert("Wrong answer! Try again (27 + 38 = ?)");
-      const userRef = doc(db, "users", currentUser.uid);
-      const snap = await getDoc(userRef);
-      if (snap.exists() && snap.data().lastWebQuiz === todayStr) {
-        return alert("You already completed today's Quiz! Come back tomorrow.");
-      }
-      await updateDoc(userRef, {
-        coins: increment(15),
-        lastWebQuiz: todayStr
-      });
-      alert("Correct! +15 Coins added to your wallet!");
-      loadUserWallet(currentUser);
+      const cpxUrl = `https://offers.cpx-research.com/index.php?app_id=${CPX_APP_ID}&ext_user_id=${currentUser.uid}&username=${encodeURIComponent(currentUser.displayName || "User")}&email=${encodeURIComponent(currentUser.email || "")}`;
+      window.open(cpxUrl, "_blank");
     };
   </script>
 
