@@ -86,7 +86,7 @@
       </button>
     </section>
 
-    <!-- Offerwalls & Survey Partners Showcase (Never Empty!) -->
+    <!-- Offerwalls & Survey Partners Showcase -->
     <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
       <div class="flex items-center justify-between">
         <div>
@@ -127,16 +127,39 @@
         </div>
       </div>
 
-      <!-- Live Survey Frame -->
+      <!-- Registration / Live Survey Frame -->
       <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[480px] flex flex-col items-center justify-center p-6 text-center">
-        <div class="max-w-md space-y-3">
+        <div class="max-w-md space-y-4">
           <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">✓</div>
-          <h4 class="text-base font-bold text-white">Ready to Start Earning?</h4>
+          <h4 class="text-base font-bold text-white">Member Registration & Sign In</h4>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Sign in with Google above to load your personalized TheoremReach & TimeWall survey dashboard. Every completed survey is tracked securely via user ID.
+            Sign in with your Google account to unlock your personalized TheoremReach & TimeWall survey dashboard. Every completed survey is tracked securely via your user ID.
           </p>
-          <button id="heroLoginBtn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-xs transition">
-            Sign In to Unlock Surveys
+
+          <!-- Required Terms of Service & Privacy Policy Consent Checkbox -->
+          <div class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-left">
+            <label for="consentCheckbox" class="flex items-start gap-2.5 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                id="consentCheckbox"
+                required
+                class="mt-0.5 w-4 h-4 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500 bg-slate-800 cursor-pointer shrink-0"
+              />
+              <span class="text-xs text-slate-300 leading-relaxed">
+                I have read and agree to the
+                <a href="/terms.html" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 underline font-semibold">Terms of Service (TOS)</a>
+                and
+                <a href="/privacy.html" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 underline font-semibold">Privacy Policy (PP)</a>.
+                <span class="text-rose-400 font-bold">*</span>
+              </span>
+            </label>
+            <p id="consentError" class="hidden text-[11px] text-rose-400 font-semibold mt-2">
+              ⚠️ Please check the box above to agree to our Terms of Service and Privacy Policy before signing in.
+            </p>
+          </div>
+
+          <button id="heroLoginBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg">
+            Sign In with Google to Unlock Surveys
           </button>
         </div>
       </div>
@@ -163,31 +186,15 @@
   <footer class="border-t border-slate-800 bg-slate-900/60 mt-8">
     <div class="max-w-3xl mx-auto px-4 py-6 text-center text-xs text-slate-400 space-y-2">
       <div class="flex flex-wrap justify-center gap-4">
-        <button id="openTermsBtn" class="hover:text-emerald-400 underline">Terms of Service</button>
+        <a href="/terms.html" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 underline">Terms of Service</a>
         <span>•</span>
-        <a href="/privacy.html" class="hover:text-emerald-400 underline">Privacy Policy</a>
+        <a href="/privacy.html" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 underline">Privacy Policy</a>
         <span>•</span>
         <a href="mailto:rupayvibe.official@gmail.com" class="hover:text-emerald-400 underline">Contact Support</a>
       </div>
       <p class="text-slate-500">© 2026 JP Studio — RupayVibe Web Survey Portal. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- Terms of Service Modal -->
-  <div id="termsModal" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 space-y-4">
-      <div class="flex justify-between items-center">
-        <h3 class="text-base font-bold text-white">Terms of Service — RupayVibe Web</h3>
-        <button id="closeTermsBtn" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
-      </div>
-      <div class="text-xs text-slate-300 space-y-2 max-h-72 overflow-y-auto leading-relaxed">
-        <p>1. <strong>Eligibility:</strong> Users must provide accurate demographic information when answering market research surveys.</p>
-        <p>2. <strong>Fair Use Policy:</strong> Use of VPNs, proxies, emulators, or fraudulent completions will result in account suspension and forfeiture of rewards.</p>
-        <p>3. <strong>Rewards & Conversion:</strong> 100 Coins equal ₹1.00 INR. Rewards are subject to partner postback verification.</p>
-        <p>4. <strong>Support:</strong> For any account or reward queries, contact rupayvibe.official@gmail.com.</p>
-      </div>
-    </div>
-  </div>
 
   <!-- Firebase Modular SDK -->
   <script type="module">
@@ -219,6 +226,8 @@
     const loginBtn = document.getElementById("loginBtn");
     const heroLoginBtn = document.getElementById("heroLoginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
+    const consentCheckbox = document.getElementById("consentCheckbox");
+    const consentError = document.getElementById("consentError");
     const coinBalanceEl = document.getElementById("coinBalance");
     const inrValueEl = document.getElementById("inrValue");
     const authBadge = document.getElementById("authBadge");
@@ -227,12 +236,24 @@
     const openTimewallBtn = document.getElementById("openTimewallBtn");
     const scrollSurveyBtn = document.getElementById("scrollSurveyBtn");
 
-    // Terms Modal Handlers
-    const termsModal = document.getElementById("termsModal");
-    document.getElementById("openTermsBtn").onclick = () => termsModal.classList.remove("hidden");
-    document.getElementById("closeTermsBtn").onclick = () => termsModal.classList.add("hidden");
+    if (consentCheckbox) {
+      consentCheckbox.addEventListener("change", () => {
+        if (consentCheckbox.checked && consentError) {
+          consentError.classList.add("hidden");
+        }
+      });
+    }
 
-    const doLogin = () => signInWithPopup(auth, provider).catch((err) => alert(err.message));
+    const doLogin = () => {
+      if (consentCheckbox && !consentCheckbox.checked) {
+        if (consentError) consentError.classList.remove("hidden");
+        surveyContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+        consentCheckbox.focus();
+        return;
+      }
+      signInWithPopup(auth, provider).catch((err) => alert(err.message));
+    };
+
     loginBtn.onclick = doLogin;
     if (heroLoginBtn) heroLoginBtn.onclick = doLogin;
     logoutBtn.onclick = () => signOut(auth);
@@ -292,13 +313,17 @@
           await setDoc(userRef, {
             name: user.displayName || "User",
             email: user.email,
+            acceptedTerms: true,
             coins: 0,
             createdAt: new Date().toISOString()
           });
-        } else if (snap.data().lastWebCheckin === today) {
-          dailyBonusBtn.innerText = "Claimed Today ✓";
-          dailyBonusBtn.disabled = true;
-          dailyBonusBtn.classList.add("opacity-60");
+        } else {
+          await updateDoc(userRef, { acceptedTerms: true });
+          if (snap.data().lastWebCheckin === today) {
+            dailyBonusBtn.innerText = "Claimed Today ✓";
+            dailyBonusBtn.disabled = true;
+            dailyBonusBtn.classList.add("opacity-60");
+          }
         }
 
         unsubscribeWallet = onSnapshot(userRef, (docSnap) => {
