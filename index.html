@@ -3,142 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RupayVibe Surveys - Earn Instant Rewards</title>
+  <title>RupayVibe Web — Paid Surveys & Market Research Portal</title>
+  <meta name="description" content="Participate in verified market research surveys and micro-tasks on RupayVibe Web Portal and earn instant rewards synced with your RupayVibe wallet." />
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    button, input, a {
-      position: relative;
-      z-index: 50;
-    }
-  </style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between font-sans">
+<body class="bg-slate-950 text-white min-h-screen font-sans flex flex-col">
 
   <!-- Header -->
-  <header class="p-4 border-b border-slate-800 flex items-center justify-between max-w-2xl mx-auto w-full relative z-50">
-    <div>
-      <div class="flex items-center gap-2">
-        <h1 class="text-xl font-bold text-emerald-400">RupayVibe</h1>
-        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">SURVEY PORTAL</span>
+  <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-30">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-slate-950 font-extrabold text-lg">R</div>
+        <div>
+          <h1 class="text-lg font-bold text-white leading-tight">RupayVibe <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full ml-1">SURVEY PORTAL</span></h1>
+          <p class="text-[11px] text-slate-400">Official Market Research & Rewards Hub</p>
+        </div>
       </div>
-      <p class="text-xs text-slate-400">Synced live with your RupayVibe App Wallet</p>
+      <div id="userSection" class="flex items-center gap-2">
+        <button id="loginBtn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm transition shadow">
+          Sign in with Google
+        </button>
+        <button id="logoutBtn" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs px-3 py-2 rounded-xl transition">
+          Logout
+        </button>
+      </div>
     </div>
-    <button id="authBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold text-sm px-4 py-2 rounded-lg transition">
-      Sign in with Google
-    </button>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-2xl mx-auto w-full p-4 space-y-5 flex-1">
+  <main class="max-w-3xl mx-auto w-full p-4 space-y-6 flex-grow">
 
-    <!-- Wallet Balance Card -->
-    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-5 shadow-lg">
-      <div class="flex items-center justify-between">
-        <p class="text-xs uppercase tracking-wider text-emerald-100 font-medium">Total Wallet Balance</p>
-        <span class="text-[11px] bg-black/20 text-emerald-100 px-2.5 py-0.5 rounded-full">100 Coins = ₹1</span>
-      </div>
-      <div class="flex items-baseline gap-2 mt-1">
-        <h2 id="coinBalance" class="text-3xl font-extrabold">0 Coins</h2>
-      </div>
-      <p id="inrValue" class="text-xs text-emerald-100 mt-1">≈ ₹0.00 (Withdraw instantly via RupayVibe Android App)</p>
-    </div>
-
-    <!-- Adsterra 320x50 Banner Ad -->
-    <div id="ad-banner-top" class="bg-slate-900 border border-slate-800 rounded-xl p-2 flex justify-center items-center overflow-hidden">
-      <script>
-        atOptions = {
-          'key' : '96a4d35694ad361e45a751c8bf38b77a',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
-      </script>
-      <script src="https://bauval.org/22/96a4d35694ad361e45a751c8bf38b77a"></script>
-    </div>
-
-    <!-- Quick Daily Web Tasks (2 Clean Tasks) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-      <!-- Daily Web Bonus -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
+    <!-- Hero / Wallet Section -->
+    <section class="bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 border border-emerald-500/30 rounded-2xl p-6 shadow-xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-medium">Daily Check-in</span>
-          <h3 class="text-lg font-bold mt-2">Claim +10 Coins</h3>
-          <p class="text-xs text-slate-400 mt-1">Visit RupayVibe Survey Portal daily & add instant coins.</p>
+          <span class="text-[11px] uppercase tracking-wider bg-black/25 text-emerald-100 px-3 py-1 rounded-full font-semibold">
+            100 Coins = ₹1.00 INR
+          </span>
+          <h2 id="walletTitle" class="text-2xl sm:text-3xl font-extrabold mt-3">Share Opinions. Earn Real Rewards.</h2>
+          <p id="walletSub" class="text-xs sm:text-sm text-emerald-100/90 mt-1">
+            Complete trusted brand surveys & micro-tasks. Your coins sync automatically with your RupayVibe account.
+          </p>
         </div>
-        <button id="dailyBonusBtn" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition">
-          Claim 10 Coins
-        </button>
-      </div>
-
-      <!-- Sponsor Visit Task (Adsterra Smartlink) -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between space-y-4">
-        <div>
-          <span class="text-[11px] bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full font-medium">Sponsor Task</span>
-          <h3 class="text-lg font-bold mt-2">Visit & Earn +20 Coins</h3>
-          <p class="text-xs text-slate-400 mt-1">Open sponsor page for 10 seconds to unlock +20 instant coins.</p>
+        <div class="bg-slate-950/60 border border-white/10 rounded-2xl p-4 min-w-[170px] text-center">
+          <p class="text-[11px] text-emerald-200 uppercase tracking-wider">Wallet Balance</p>
+          <p class="text-2xl font-extrabold text-white mt-1"><span id="coinBalance">0</span> <span class="text-sm font-semibold text-emerald-400">Coins</span></p>
+          <p class="text-xs text-slate-300 mt-0.5">≈ ₹<span id="inrValue">0.00</span></p>
         </div>
-        <button id="sponsorTaskBtn" class="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2.5 rounded-xl text-sm transition">
-          Visit Sponsor (10s)
-        </button>
       </div>
+    </section>
 
-    </div>
+    <!-- How It Works (Always Visible for Reviewers & New Visitors) -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-sm">1</div>
+        <h3 class="font-bold text-sm mt-3">Sign In Securely</h3>
+        <p class="text-xs text-slate-400 mt-1">Log in with your Google account to connect your unified RupayVibe wallet.</p>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center text-sm">2</div>
+        <h3 class="font-bold text-sm mt-3">Complete Surveys & Tasks</h3>
+        <p class="text-xs text-slate-400 mt-1">Choose from TheoremReach, TimeWall, or CPX Research surveys matched to your profile.</p>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm">3</div>
+        <h3 class="font-bold text-sm mt-3">Instant Coin Credit</h3>
+        <p class="text-xs text-slate-400 mt-1">Rewards are verified via secure server postbacks and credited directly to your balance.</p>
+      </div>
+    </section>
 
-    <!-- TimeWall Offerwall Partner Card -->
-    <div class="bg-slate-900 border border-indigo-500/40 rounded-2xl p-4 flex items-center justify-between gap-4">
+    <!-- Daily Web Check-In (Visible & Clean) -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
         <div class="flex items-center gap-2">
-          <h3 class="text-base font-bold text-white">⚡ TimeWall Tasks & Surveys</h3>
-          <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-semibold">INSTANT</span>
+          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-semibold">Daily Member Bonus</span>
+          <span class="text-xs text-slate-400">+10 Coins / Day</span>
         </div>
-        <p class="text-xs text-slate-400 mt-1">Micro-tasks, clicks, watch & surveys (Up to +4,000 Coins)</p>
+        <h3 class="text-base font-bold mt-1.5">Daily Survey Portal Check-In</h3>
+        <p class="text-xs text-slate-400 mt-0.5">Visit RupayVibe Survey Portal daily to claim your loyalty bonus.</p>
       </div>
-      <button id="timewallBtn" class="shrink-0 bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">
-        Open TimeWall ↗
+      <button id="dailyBonusBtn" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm transition shrink-0">
+        Claim +10 Coins
       </button>
-    </div>
+    </section>
 
-    <!-- Primary Surveys Section (TheoremReach Offerwall) -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+    <!-- Offerwalls & Survey Partners Showcase (Never Empty!) -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-base font-bold">TheoremReach Paid Surveys</h3>
-          <p class="text-xs text-slate-400">Share your opinion & earn 50 – 500 Coins directly</p>
+          <h3 class="text-base font-bold text-white">Verified Survey & Task Partners</h3>
+          <p class="text-xs text-slate-400">Select an offerwall below to start earning 50 – 4,000 Coins</p>
         </div>
-        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Live</span>
+        <span id="authBadge" class="text-[11px] bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">Preview Mode</span>
       </div>
-      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[520px] flex items-center justify-center">
-        <p class="text-sm text-slate-400 p-6 text-center">Sign in with Google above to load available surveys.</p>
-      </div>
-    </div>
 
-    <!-- Secondary Survey Partner Card (CPX Research Ready) -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-2">
-          <h3 class="text-base font-bold">CPX Research Survey Wall</h3>
-          <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded font-semibold">PARTNER</span>
+      <!-- Partner Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <!-- TimeWall Card -->
+        <div class="bg-slate-950 border border-blue-500/40 rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-400">⚡ TimeWall Offerwall</span>
+              <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">Micro-Tasks & Surveys</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Complete quick clicks, short tasks, and paid surveys with instant postback verification.</p>
+          </div>
+          <button id="openTimewallBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
+            Launch TimeWall Tasks ↗
+          </button>
         </div>
-        <p class="text-xs text-slate-400 mt-1">Extra high-paying global & Indian market surveys (Up to +500 Coins)</p>
+
+        <!-- TheoremReach Card -->
+        <div class="bg-slate-950 border border-emerald-500/40 rounded-xl p-4 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400">📊 TheoremReach Surveys</span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">50 – 500 Coins</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Share feedback with global brands and earn partial disqualification rewards too.</p>
+          </div>
+          <button id="scrollSurveyBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition">
+            Start Paid Surveys ↓
+          </button>
+        </div>
       </div>
-      <button id="cpxBtn" class="shrink-0 bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">
-        Open Wall
-      </button>
-    </div>
+
+      <!-- Live Survey Frame -->
+      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[480px] flex flex-col items-center justify-center p-6 text-center">
+        <div class="max-w-md space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">✓</div>
+          <h4 class="text-base font-bold text-white">Ready to Start Earning?</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Sign in with Google above to load your personalized TheoremReach & TimeWall survey dashboard. Every completed survey is tracked securely via user ID.
+          </p>
+          <button id="heroLoginBtn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-xs transition">
+            Sign In to Unlock Surveys
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ & Trust Section -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+      <h3 class="text-sm font-bold text-white">Frequently Asked Questions</h3>
+      <div class="space-y-2.5 text-xs text-slate-400">
+        <div>
+          <p class="font-semibold text-slate-200">How are survey rewards credited?</p>
+          <p class="mt-0.5">When you complete a survey or task on TheoremReach or TimeWall, their server sends an encrypted postback to our API and credits coins immediately.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-200">Are VPNs or multiple accounts allowed?</p>
+          <p class="mt-0.5">No. To maintain high data quality for our research partners, VPNs, proxies, and automated bots are strictly prohibited.</p>
+        </div>
+      </div>
+    </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="p-4 border-t border-slate-800 text-center text-xs text-slate-400 space-x-4 max-w-2xl mx-auto w-full relative z-50">
-    <span>© 2026 RupayVibe (JP Studio)</span>
-    <a href="/privacy.html" class="text-emerald-400 hover:underline">Privacy Policy</a>
-    <a href="/terms.html" class="text-emerald-400 hover:underline">Terms of Service</a>
-    <a href="/contact.html" class="text-emerald-400 hover:underline">Contact Us</a>
+  <footer class="border-t border-slate-800 bg-slate-900/60 mt-8">
+    <div class="max-w-3xl mx-auto px-4 py-6 text-center text-xs text-slate-400 space-y-2">
+      <div class="flex flex-wrap justify-center gap-4">
+        <button id="openTermsBtn" class="hover:text-emerald-400 underline">Terms of Service</button>
+        <span>•</span>
+        <a href="/privacy.html" class="hover:text-emerald-400 underline">Privacy Policy</a>
+        <span>•</span>
+        <a href="mailto:rupayvibe.official@gmail.com" class="hover:text-emerald-400 underline">Contact Support</a>
+      </div>
+      <p class="text-slate-500">© 2026 JP Studio — RupayVibe Web Survey Portal. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- Firebase SDKs -->
+  <!-- Terms of Service Modal -->
+  <div id="termsModal" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-base font-bold text-white">Terms of Service — RupayVibe Web</h3>
+        <button id="closeTermsBtn" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+      <div class="text-xs text-slate-300 space-y-2 max-h-72 overflow-y-auto leading-relaxed">
+        <p>1. <strong>Eligibility:</strong> Users must provide accurate demographic information when answering market research surveys.</p>
+        <p>2. <strong>Fair Use Policy:</strong> Use of VPNs, proxies, emulators, or fraudulent completions will result in account suspension and forfeiture of rewards.</p>
+        <p>3. <strong>Rewards & Conversion:</strong> 100 Coins equal ₹1.00 INR. Rewards are subject to partner postback verification.</p>
+        <p>4. <strong>Support:</strong> For any account or reward queries, contact rupayvibe.official@gmail.com.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Modular SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -154,144 +205,122 @@
       measurementId: "G-H8C08XSQN2"
     };
 
+    const THEOREMREACH_API_KEY = "9861c27a47152ec23917c82901e5";
+    const TIMEWALL_OID = "782f6b0747ee514c";
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
-    const SMARTLINK_URL = "https://asiafilm.org/4/11743e7be4c0a04ea4fbe3b9eb71414e";
-    const THEOREMREACH_API_KEY = "9861c27a47152ec23917c82901e5";
-    const TIMEWALL_OID = "782f6b0747ee514c";
-    const CPX_APP_ID = "YOUR_CPX_APP_ID";
-
     let currentUser = null;
     let unsubscribeWallet = null;
 
-    const authBtn = document.getElementById("authBtn");
+    const loginBtn = document.getElementById("loginBtn");
+    const heroLoginBtn = document.getElementById("heroLoginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
     const coinBalanceEl = document.getElementById("coinBalance");
     const inrValueEl = document.getElementById("inrValue");
-    const dailyBonusBtn = document.getElementById("dailyBonusBtn");
-    const sponsorTaskBtn = document.getElementById("sponsorTaskBtn");
-    const timewallBtn = document.getElementById("timewallBtn");
-    const cpxBtn = document.getElementById("cpxBtn");
+    const authBadge = document.getElementById("authBadge");
     const surveyContainer = document.getElementById("surveyContainer");
+    const dailyBonusBtn = document.getElementById("dailyBonusBtn");
+    const openTimewallBtn = document.getElementById("openTimewallBtn");
+    const scrollSurveyBtn = document.getElementById("scrollSurveyBtn");
 
-    authBtn.onclick = async () => {
-      if (currentUser) {
-        await signOut(auth);
-      } else {
-        await signInWithPopup(auth, provider);
-      }
+    // Terms Modal Handlers
+    const termsModal = document.getElementById("termsModal");
+    document.getElementById("openTermsBtn").onclick = () => termsModal.classList.remove("hidden");
+    document.getElementById("closeTermsBtn").onclick = () => termsModal.classList.add("hidden");
+
+    const doLogin = () => signInWithPopup(auth, provider).catch((err) => alert(err.message));
+    loginBtn.onclick = doLogin;
+    if (heroLoginBtn) heroLoginBtn.onclick = doLogin;
+    logoutBtn.onclick = () => signOut(auth);
+
+    scrollSurveyBtn.onclick = () => {
+      surveyContainer.scrollIntoView({ behavior: "smooth" });
     };
 
-    function subscribeUserWallet(user) {
-      if (unsubscribeWallet) unsubscribeWallet();
-      const userRef = doc(db, "users", user.uid);
-
-      unsubscribeWallet = onSnapshot(userRef, async (snap) => {
-        if (snap.exists()) {
-          const coins = snap.data().coins || 0;
-          coinBalanceEl.innerText = `${coins} Coins`;
-          inrValueEl.innerText = `≈ ₹${(coins / 100).toFixed(2)} (Withdraw instantly via RupayVibe Android App)`;
-        } else {
-          await setDoc(userRef, {
-            email: user.email,
-            name: user.displayName,
-            coins: 100
-          }, { merge: true });
-        }
-      });
-    }
-
-    onAuthStateChanged(auth, (user) => {
-      currentUser = user;
-      if (user) {
-        authBtn.innerText = "Sign Out";
-        subscribeUserWallet(user);
-        surveyContainer.innerHTML = `
-          <iframe 
-            src="https://theoremreach.com/respondent_entry/direct?api_key=${THEOREMREACH_API_KEY}&user_id=${user.uid}" 
-            width="100%" 
-            height="540" 
-            frameborder="0" 
-            class="w-full bg-white">
-          </iframe>
-        `;
-      } else {
-        if (unsubscribeWallet) unsubscribeWallet();
-        authBtn.innerText = "Sign in with Google";
-        coinBalanceEl.innerText = "0 Coins";
-        inrValueEl.innerText = "≈ ₹0.00 (Withdraw instantly via RupayVibe Android App)";
-        surveyContainer.innerHTML = `<p class="text-sm text-slate-400 p-6 text-center">Sign in with Google above to load available surveys.</p>`;
+    openTimewallBtn.onclick = () => {
+      if (!currentUser) {
+        doLogin();
+        return;
       }
-    });
+      const twUrl = `https://timewall.io/users/login?oid=${TIMEWALL_OID}&uid=${encodeURIComponent(currentUser.uid)}`;
+      window.open(twUrl, "_blank", "noopener,noreferrer");
+    };
 
-    const todayStr = new Date().toISOString().split("T")[0];
-
-    // 1. Daily Web Bonus (+10 Coins)
     dailyBonusBtn.onclick = async () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
+      if (!currentUser) {
+        doLogin();
+        return;
+      }
+      const today = new Date().toISOString().split("T")[0];
       const userRef = doc(db, "users", currentUser.uid);
       const snap = await getDoc(userRef);
-      if (snap.exists() && snap.data().lastWebBonus === todayStr) {
-        return alert("You already claimed today's Web Bonus! Come back tomorrow.");
+      if (snap.exists() && snap.data().lastWebCheckin === today) {
+        alert("You already claimed today's +10 Coins bonus! Come back tomorrow.");
+        return;
       }
       await updateDoc(userRef, {
         coins: increment(10),
-        lastWebBonus: todayStr
+        lastWebCheckin: today
       });
-      alert("+10 Coins added to your wallet!");
+      dailyBonusBtn.innerText = "Claimed Today ✓";
+      dailyBonusBtn.disabled = true;
+      dailyBonusBtn.classList.add("opacity-60");
     };
 
-    // 2. Sponsor Smartlink Task (+20 Coins after 10s)
-    sponsorTaskBtn.onclick = async () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      const userRef = doc(db, "users", currentUser.uid);
-      const snap = await getDoc(userRef);
-      if (snap.exists() && snap.data().lastSponsorTask === todayStr) {
-        return alert("You already completed today's Sponsor Task! Come back tomorrow.");
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+      if (unsubscribeWallet) {
+        unsubscribeWallet();
+        unsubscribeWallet = null;
       }
 
-      window.open(SMARTLINK_URL, "_blank");
-      sponsorTaskBtn.disabled = true;
-      let sec = 10;
-      sponsorTaskBtn.innerText = `Verifying... ${sec}s`;
+      if (user) {
+        loginBtn.classList.add("hidden");
+        logoutBtn.classList.remove("hidden");
+        authBadge.innerText = `Connected: ${user.email}`;
+        authBadge.className = "text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30";
 
-      const timer = setInterval(async () => {
-        sec--;
-        if (sec > 0) {
-          sponsorTaskBtn.innerText = `Verifying... ${sec}s`;
-        } else {
-          clearInterval(timer);
-          await updateDoc(userRef, {
-            coins: increment(20),
-            lastSponsorTask: todayStr
+        const userRef = doc(db, "users", user.uid);
+        const snap = await getDoc(userRef);
+        const today = new Date().toISOString().split("T")[0];
+
+        if (!snap.exists()) {
+          await setDoc(userRef, {
+            name: user.displayName || "User",
+            email: user.email,
+            coins: 0,
+            createdAt: new Date().toISOString()
           });
-          sponsorTaskBtn.innerText = "Completed (+20 Coins)";
-          alert("Sponsor visit verified! +20 Coins added to your wallet!");
+        } else if (snap.data().lastWebCheckin === today) {
+          dailyBonusBtn.innerText = "Claimed Today ✓";
+          dailyBonusBtn.disabled = true;
+          dailyBonusBtn.classList.add("opacity-60");
         }
-      }, 1000);
-    };
 
-    // 3. TimeWall Offerwall
-    timewallBtn.onclick = () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      const twUrl = `https://timewall.io/users/login?oid=${TIMEWALL_OID}&uid=${encodeURIComponent(currentUser.uid)}`;
-      window.open(twUrl, "_blank");
-    };
+        unsubscribeWallet = onSnapshot(userRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const coins = docSnap.data().coins || 0;
+            coinBalanceEl.innerText = coins;
+            inrValueEl.innerText = (coins / 100).toFixed(2);
+          }
+        });
 
-    // 4. CPX Research Survey Wall
-    cpxBtn.onclick = () => {
-      if (!currentUser) return alert("Please sign in with Google first!");
-      if (CPX_APP_ID === "YOUR_CPX_APP_ID") {
-        return alert("CPX Research Survey Wall is under approval. Use TheoremReach Surveys above!");
+        const trUrl = `https://theoremreach.com/respondent_entry/direct?api_key=${THEOREMREACH_API_KEY}&user_id=${encodeURIComponent(user.uid)}`;
+        surveyContainer.className = "bg-white rounded-xl overflow-hidden min-h-[540px]";
+        surveyContainer.innerHTML = `<iframe src="${trUrl}" class="w-full h-[560px] border-0" allow="geolocation"></iframe>`;
+      } else {
+        loginBtn.classList.remove("hidden");
+        logoutBtn.classList.add("hidden");
+        authBadge.innerText = "Preview Mode";
+        authBadge.className = "text-[11px] bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700";
+        coinBalanceEl.innerText = "0";
+        inrValueEl.innerText = "0.00";
       }
-      const cpxUrl = `https://offers.cpx-research.com/index.php?app_id=${CPX_APP_ID}&ext_user_id=${currentUser.uid}&username=${encodeURIComponent(currentUser.displayName || "User")}&email=${encodeURIComponent(currentUser.email || "")}`;
-      window.open(cpxUrl, "_blank");
-    };
+    });
   </script>
-
-  <!-- Adsterra Social Bar Ad -->
-  <script data-cfasync="false" src="https://bauval.org/14/edcd64539f5e76d6e83cc37e4705ff32"></script>
 </body>
 </html>
