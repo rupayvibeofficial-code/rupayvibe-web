@@ -21,7 +21,7 @@
       </div>
       <div id="userSection" class="flex items-center gap-2">
         <button id="loginBtn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm transition shadow">
-          Sign in with Google
+          Sign in (+50 Free)
         </button>
         <button id="logoutBtn" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs px-3 py-2 rounded-xl transition">
           Logout
@@ -37,7 +37,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span class="text-[11px] uppercase tracking-wider bg-black/25 text-emerald-100 px-3 py-1 rounded-full font-semibold">
-            100 Coins = ₹1.00 INR
+            100 Coins = ₹1.00 INR • +50 Free Signup Bonus
           </span>
           <h2 id="walletTitle" class="text-2xl sm:text-3xl font-extrabold mt-3">Share Opinions. Earn Real Rewards.</h2>
           <p id="walletSub" class="text-xs sm:text-sm text-emerald-100/90 mt-1">
@@ -56,8 +56,8 @@
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-3">
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
         <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-sm">1</div>
-        <h3 class="font-bold text-sm mt-3">Sign In Securely</h3>
-        <p class="text-xs text-slate-400 mt-1">Log in with your Google account to connect your unified RupayVibe wallet.</p>
+        <h3 class="font-bold text-sm mt-3">Sign In (+50 Coins)</h3>
+        <p class="text-xs text-slate-400 mt-1">Log in with your Google account to get +50 free welcome coins in your unified wallet.</p>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
         <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center text-sm">2</div>
@@ -133,7 +133,7 @@
           <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">✓</div>
           <h4 class="text-base font-bold text-white">Member Registration & Sign In</h4>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Sign in with your Google account to unlock your personalized TheoremReach & TimeWall survey dashboard. Every completed survey is tracked securely via your user ID.
+            Sign in with your Google account to get <span class="text-emerald-400 font-bold">+50 Free Coins</span> and unlock your personalized TheoremReach & TimeWall survey dashboard.
           </p>
 
           <!-- Required Terms of Service & Privacy Policy Consent Checkbox -->
@@ -159,7 +159,7 @@
           </div>
 
           <button id="heroLoginBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg">
-            Sign In with Google to Unlock Surveys
+            Sign In with Google (+50 Free Coins)
           </button>
         </div>
       </div>
@@ -200,7 +200,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, increment, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCiLR6L8BCb3BeXgCLtH8Uye7RWKOsbOyA",
@@ -214,6 +214,7 @@
 
     const THEOREMREACH_API_KEY = "9861c27a47152ec23917c82901e5";
     const TIMEWALL_OID = "54c4c8682431bdcb";
+    const WELCOME_COINS = 50;
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -287,6 +288,12 @@
         coins: increment(10),
         lastWebCheckin: today
       });
+      await addDoc(collection(db, "users", currentUser.uid, "history"), {
+        title: "Daily Survey Portal Check-In",
+        coins: 10,
+        type: "credit",
+        createdAt: serverTimestamp()
+      });
       dailyBonusBtn.innerText = "Claimed Today ✓";
       dailyBonusBtn.disabled = true;
       dailyBonusBtn.classList.add("opacity-60");
@@ -310,12 +317,24 @@
         const today = new Date().toISOString().split("T")[0];
 
         if (!snap.exists()) {
+          const generatedCode = "RV" + user.uid.substring(0, 5).toUpperCase();
           await setDoc(userRef, {
             name: user.displayName || "User",
             email: user.email,
+            photoUrl: user.photoURL || "",
             acceptedTerms: true,
-            coins: 0,
-            createdAt: new Date().toISOString()
+            coins: WELCOME_COINS,
+            referralCode: generatedCode,
+            referredBy: "",
+            referralsCount: 0,
+            withdrawalsCount: 0,
+            createdAt: serverTimestamp()
+          });
+          await addDoc(collection(db, "users", user.uid, "history"), {
+            title: "Welcome Signup Bonus",
+            coins: WELCOME_COINS,
+            type: "credit",
+            createdAt: serverTimestamp()
           });
         } else {
           await updateDoc(userRef, { acceptedTerms: true });
