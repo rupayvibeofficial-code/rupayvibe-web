@@ -11,12 +11,12 @@
 
   <!-- Header -->
   <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-30">
-    <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="max-w-3xl mx-auto px-4 py-3.5 flex justify-between items-center">
       <div class="flex items-center gap-2.5">
         <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-slate-950 font-extrabold text-lg">R</div>
         <div>
           <h1 class="text-lg font-bold text-white leading-tight">RupayVibe <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full ml-1">SURVEY PORTAL</span></h1>
-          <p class="text-[11px] text-slate-400">Official Market Research & Rewards Hub</p>
+          <p class="text-[11px] text-slate-400">100 Coins = ₹1.00 • Instant Wallet Sync</p>
         </div>
       </div>
       <div id="userSection" class="flex items-center gap-2">
@@ -30,110 +30,70 @@
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto w-full p-4 space-y-6 flex-grow">
+  <main class="max-w-3xl mx-auto w-full p-4 space-y-5 flex-grow">
 
-    <!-- Hero / Wallet Section -->
-    <section class="bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 border border-emerald-500/30 rounded-2xl p-6 shadow-xl">
+    <!-- Compact Wallet & Daily Check-In Bar -->
+    <section class="bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 border border-emerald-500/30 rounded-2xl p-4 sm:p-5 shadow-xl">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span class="text-[11px] uppercase tracking-wider bg-black/25 text-emerald-100 px-3 py-1 rounded-full font-semibold">
+          <span class="text-[10px] uppercase tracking-wider bg-black/25 text-emerald-100 px-2.5 py-1 rounded-full font-semibold">
             100 Coins = ₹1.00 INR • +50 Free Signup Bonus
           </span>
-          <h2 id="walletTitle" class="text-2xl sm:text-3xl font-extrabold mt-3">Share Opinions. Earn Real Rewards.</h2>
-          <p id="walletSub" class="text-xs sm:text-sm text-emerald-100/90 mt-1">
-            Complete trusted brand surveys & micro-tasks. Your coins sync automatically with your RupayVibe account.
-          </p>
+          <div class="flex items-baseline gap-3 mt-2">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white"><span id="coinBalance">0</span> <span class="text-sm font-semibold text-emerald-300">Coins</span></h2>
+            <span class="text-xs text-emerald-100 font-semibold">(≈ ₹<span id="inrValue">0.00</span>)</span>
+          </div>
+          <p id="authBadge" class="text-[11px] text-emerald-100/80 mt-1">Sign in to load personalized paid surveys & tasks</p>
         </div>
-        <div class="bg-slate-950/60 border border-white/10 rounded-2xl p-4 min-w-[170px] text-center">
-          <p class="text-[11px] text-emerald-200 uppercase tracking-wider">Wallet Balance</p>
-          <p class="text-2xl font-extrabold text-white mt-1"><span id="coinBalance">0</span> <span class="text-sm font-semibold text-emerald-400">Coins</span></p>
-          <p class="text-xs text-slate-300 mt-0.5">≈ ₹<span id="inrValue">0.00</span></p>
-        </div>
+
+        <button id="dailyBonusBtn" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs transition shrink-0 shadow">
+          🎁 Daily Check-In (+10 Coins)
+        </button>
       </div>
     </section>
 
-    <!-- How It Works (Always Visible for Reviewers & New Visitors) -->
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-sm">1</div>
-        <h3 class="font-bold text-sm mt-3">Sign In (+50 Coins)</h3>
-        <p class="text-xs text-slate-400 mt-1">Log in with your Google account to get +50 free welcome coins in your unified wallet.</p>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center text-sm">2</div>
-        <h3 class="font-bold text-sm mt-3">Complete Surveys & Tasks</h3>
-        <p class="text-xs text-slate-400 mt-1">Choose from TheoremReach, TimeWall, or CPX Research surveys matched to your profile.</p>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm">3</div>
-        <h3 class="font-bold text-sm mt-3">Instant Coin Credit</h3>
-        <p class="text-xs text-slate-400 mt-1">Rewards are verified via secure server postbacks and credited directly to your balance.</p>
-      </div>
-    </section>
-
-    <!-- Daily Web Check-In (Visible & Clean) -->
-    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full font-semibold">Daily Member Bonus</span>
-          <span class="text-xs text-slate-400">+10 Coins / Day</span>
-        </div>
-        <h3 class="text-base font-bold mt-1.5">Daily Survey Portal Check-In</h3>
-        <p class="text-xs text-slate-400 mt-0.5">Visit RupayVibe Survey Portal daily to claim your loyalty bonus.</p>
-      </div>
-      <button id="dailyBonusBtn" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm transition shrink-0">
-        Claim +10 Coins
-      </button>
-    </section>
-
-    <!-- Offerwalls & Survey Partners Showcase -->
-    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+    <!-- Direct Surveys & Offerwalls Section (Loads Immediately at Top!) -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-base font-bold text-white">Verified Survey & Task Partners</h3>
-          <p class="text-xs text-slate-400">Select an offerwall below to start earning 50 – 4,000 Coins</p>
+          <h3 class="text-base font-extrabold text-white">📊 Available Paid Surveys & Tasks</h3>
+          <p class="text-xs text-slate-400">Complete surveys below to earn 50 – 4,000 Coins directly</p>
         </div>
-        <span id="authBadge" class="text-[11px] bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">Preview Mode</span>
+        <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full font-bold">Live</span>
       </div>
 
-      <!-- Partner Cards Grid -->
+      <!-- Partner Quick Switch Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <!-- TimeWall Card -->
-        <div class="bg-slate-950 border border-blue-500/40 rounded-xl p-4 flex flex-col justify-between space-y-3">
+        <!-- TheoremReach Card -->
+        <div class="bg-slate-950 border border-emerald-500/40 rounded-xl p-3.5 flex items-center justify-between gap-3">
           <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-blue-400">⚡ TimeWall Offerwall</span>
-              <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">Micro-Tasks & Surveys</span>
-            </div>
-            <p class="text-xs text-slate-400 mt-2">Complete quick clicks, short tasks, and paid surveys with instant postback verification.</p>
+            <span class="text-xs font-extrabold text-emerald-400">📊 TheoremReach Surveys</span>
+            <p class="text-[11px] text-slate-400 mt-0.5">50 – 500 Coins • Instant Credit</p>
           </div>
-          <button id="openTimewallBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
-            Launch TimeWall Tasks ↗
+          <button id="scrollSurveyBtn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs shrink-0 transition">
+            Surveys ↓
           </button>
         </div>
 
-        <!-- TheoremReach Card -->
-        <div class="bg-slate-950 border border-emerald-500/40 rounded-xl p-4 flex flex-col justify-between space-y-3">
+        <!-- TimeWall Card -->
+        <div class="bg-slate-950 border border-blue-500/40 rounded-xl p-3.5 flex items-center justify-between gap-3">
           <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-emerald-400">📊 TheoremReach Surveys</span>
-              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">50 – 500 Coins</span>
-            </div>
-            <p class="text-xs text-slate-400 mt-2">Share feedback with global brands and earn partial disqualification rewards too.</p>
+            <span class="text-xs font-extrabold text-blue-400">⚡ TimeWall Offerwall</span>
+            <p class="text-[11px] text-slate-400 mt-0.5">Micro-Tasks & Surveys • Up to 4,000 Coins</p>
           </div>
-          <button id="scrollSurveyBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition">
-            Start Paid Surveys ↓
+          <button id="openTimewallBtn" class="bg-blue-600 hover:bg-blue-500 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs shrink-0 transition">
+            Open ↗
           </button>
         </div>
       </div>
 
-      <!-- Registration / Live Survey Frame -->
-      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[480px] flex flex-col items-center justify-center p-6 text-center">
+      <!-- Live Survey Frame (Directly Visible) -->
+      <div id="surveyContainer" class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden min-h-[500px] flex flex-col items-center justify-center p-6 text-center">
         <div class="max-w-md space-y-4">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">✓</div>
-          <h4 class="text-base font-bold text-white">Member Registration & Sign In</h4>
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">📊</div>
+          <h4 class="text-base font-bold text-white">Sign In to Load Live Surveys</h4>
           <p class="text-xs text-slate-400 leading-relaxed">
-            Sign in with your Google account to get <span class="text-emerald-400 font-bold">+50 Free Coins</span> and unlock your personalized TheoremReach & TimeWall survey dashboard.
+            Log in with Google to get <span class="text-emerald-400 font-bold">+50 Free Coins</span> and view all available paid surveys matched to your profile.
           </p>
 
           <!-- Required Terms of Service & Privacy Policy Consent Checkbox -->
@@ -158,7 +118,7 @@
             </p>
           </div>
 
-          <button id="heroLoginBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg">
+          <button id="heroLoginBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-5 py-3 rounded-xl text-xs sm:text-sm transition shadow-lg">
             Sign In with Google (+50 Free Coins)
           </button>
         </div>
@@ -309,8 +269,7 @@
       if (user) {
         loginBtn.classList.add("hidden");
         logoutBtn.classList.remove("hidden");
-        authBadge.innerText = `Connected: ${user.email}`;
-        authBadge.className = "text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30";
+        authBadge.innerText = `✓ Connected: ${user.email}`;
 
         const userRef = doc(db, "users", user.uid);
         const snap = await getDoc(userRef);
@@ -354,13 +313,12 @@
         });
 
         const trUrl = `https://theoremreach.com/respondent_entry/direct?api_key=${THEOREMREACH_API_KEY}&user_id=${encodeURIComponent(user.uid)}`;
-        surveyContainer.className = "bg-white rounded-xl overflow-hidden min-h-[540px]";
-        surveyContainer.innerHTML = `<iframe src="${trUrl}" class="w-full h-[560px] border-0" allow="geolocation"></iframe>`;
+        surveyContainer.className = "bg-white rounded-xl overflow-hidden min-h-[560px]";
+        surveyContainer.innerHTML = `<iframe src="${trUrl}" class="w-full h-[580px] border-0" allow="geolocation"></iframe>`;
       } else {
         loginBtn.classList.remove("hidden");
         logoutBtn.classList.add("hidden");
-        authBadge.innerText = "Preview Mode";
-        authBadge.className = "text-[11px] bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700";
+        authBadge.innerText = "Sign in to load personalized paid surveys & tasks";
         coinBalanceEl.innerText = "0";
         inrValueEl.innerText = "0.00";
       }
